@@ -1,5 +1,7 @@
 # DX11 Overlay Inspector — Bilingual Case Study
 
+[![Windows CI](https://github.com/sendnx/DX11Overlay/actions/workflows/windows-ci.yml/badge.svg)](https://github.com/sendnx/DX11Overlay/actions/workflows/windows-ci.yml)
+
 > Türkçe ve English. Bu depo bir “nasıl kurulur?” belgesi değil; modern C++ ile
 > bir DirectX 11 overlay sisteminin nasıl tasarlanacağını inceleyen, adım adım
 > okunabilir bir mühendislik çalışmasıdır.
@@ -10,12 +12,14 @@ koruma atlatma, anti-cheat müdahalesi veya üçüncü taraf proses kontrolü i�
 kullanın.
 
 Tamamlayıcı belgeler: [derleme ve doğrulama](BUILDING.md),
+[kod bilmeyenler için başlangıç rehberi](readme-1.md),
 [gerçek doğrulama sonuçları](VALIDATION.md),
 [katkı rehberi](CONTRIBUTING.md), [güvenlik politikası](SECURITY.md),
 [değişiklik günlüğü](CHANGELOG.md), [MIT lisansı](LICENSE) ve
 [üçüncü taraf bildirimleri](THIRD_PARTY_NOTICES.md).
 
 Companion documents: [build and validation](BUILDING.md),
+[beginner-friendly Turkish guide](readme-1.md),
 [recorded validation results](VALIDATION.md),
 [contributing](CONTRIBUTING.md), [security policy](SECURITY.md),
 [changelog](CHANGELOG.md), [MIT license](LICENSE), and

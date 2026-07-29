@@ -129,23 +129,24 @@ initialization result. The call now marks the discard explicitly.
 The DX11 smoke host initially kept its own render target bound during resize.
 It now unbinds and flushes the context before releasing that target.
 
-## Important remaining native-Windows gate
+## Native Windows CI validation: 2026-07-29
 
-This run is strong cross-build and Wine/DX11 evidence, but it is not a
-substitute for the repository's native Visual Studio job.
+The repository was published and its first
+[Windows CI run](https://github.com/sendnx/DX11Overlay/actions/runs/30479432707)
+completed successfully on GitHub's `windows-2022` runners:
 
-Before publishing an official binary release:
+```text
+Debug:   configure passed, MSVC build passed, 3/3 tests passed
+Release: configure passed, MSVC build passed, 3/3 tests passed
+```
 
-1. Push the repository so `.github/workflows/windows-ci.yml` can run.
-2. Require both native MSVC Debug and Release jobs to pass.
-3. Download the MSVC-built artifact produced by that workflow.
-4. Perform one final smoke run on Windows 10 or 11.
+The Release job also completed install staging and uploaded the
+`DX11Overlay-windows-x64` artifact. This closes the native Visual Studio build
+and test gate that remained after the LLVM-MinGW/Wine validation.
 
 The local LLVM-MinGW build dynamically uses `libc++.dll` and `libunwind.dll`.
-Those runtime DLLs were placed beside the test binaries for this validation.
-Do not publish the local cross-compiled `stage/` directory as the official
-Windows package. The intended release artifact is the native MSVC artifact
-from Windows CI.
+That local cross-compiled `stage/` directory should not be published as the
+official package. Use the native MSVC artifact produced by Windows CI.
 
 ## Clean revalidation: 2026-07-29
 
