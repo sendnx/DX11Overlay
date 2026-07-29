@@ -1,0 +1,47 @@
+name: Windows CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: windows-2022
+    strategy:
+      fail-fast: false
+      matrix:
+        configuration: [Debug, Release]
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Configure
+        run: >
+          cmake -S . -B build -A x64
+          -DDX11_OVERLAY_BUILD_TESTS=ON
+          -DDX11_OVERLAY_WARNINGS_AS_ERRORS=ON
+
+      - name: Build
+        run: cmake --build build --config ${{ matrix.configuration }} --parallel
+
+      - name: Test
+        run: >
+          ctest --test-dir build
+          -C ${{ matrix.configuration }}
+          --output-on-failure
+
+      - name: Stage release artifact
+        if: matrix.configuration == 'Release'
+        run: cmake --install build --config Release --prefix stage
+
+      - name: Upload release artifact
+        if: matrix.configuration == 'Release'
+        uses: actions/upload-artifact@v4
+        with:
+          name: DX11Overlay-windows-x64
+          path: stage/
+          if-no-files-found: error
